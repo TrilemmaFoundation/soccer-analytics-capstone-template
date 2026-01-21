@@ -1,5 +1,14 @@
 # Soccer Analytics Capstone Template
 
+## Team
+
+- Thomas LaRock
+- Noah Boonin
+- Alexander Avramov
+
+## Project
+Georgia Tech MSA Spring 2026 – Soccer Analytics Capstone
+
 **Project (Trilemma Foundation): “Delivering Elite European Football (Soccer) Analytics”**
 
 ## Project Overview
