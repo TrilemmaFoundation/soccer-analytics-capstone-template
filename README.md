@@ -12,22 +12,27 @@ Georgia Tech MSA Spring 2026 – Soccer Analytics Capstone
 **Project (Trilemma Foundation): “Delivering Elite European Football (Soccer) Analytics”**
 
 ## Project Overview
-Build an **MIT-licensed, open-source** pipeline that ingests **public match event data** and produces **interactive player/team analytics dashboards** (e.g., possession chains, xG flow, pressure heatmaps).
+This project aims to build an **MIT-licensed, open-source** pipeline that ingests **public match event data** and produces **interactive player/team analytics dashboards**. The goal is to create actionable insights (e.g., possession chains, xG flow, pressure heatmaps) from raw event data.
 
 > [!IMPORTANT]
 > **License Notice**: The code in this repository is licensed under MIT. However, the data sources (StatsBomb and Polymarket) are not covered by the MIT license and have their own licensing terms. See the [Data Licensing](#data-licensing) section below.
 
-## Core Scope
-* **Data Processing**: Ingest and version **StatsBomb Open** match event data; **normalize IDs** (team/player/competition); create train/val/test splits.
-* **Feature Engineering**: Segment events into **possessions/chains**; derive features like carries, progressive passes, zones of control.
-* **Identity Resolution**: Resolve identities across providers (e.g., Transfermarkt/FIFA IDs; handle transfers/loans).
-* **Metrics & Analytics**: Compute + store metrics (xG, xThreat, field tilt, packing, PPDA) in DuckDB/Postgres (+ PostGIS optional).
-* **Evaluation**: Evaluate vs published benchmarks (e.g., Opta/Understat) and report deviations.
-* **Visualization**: Visualize/serve via a **static React + Leaflet** site loading precomputed bundles (filters by match/player/phase/minute range).
-* **Performance**: Profile performance (runtime/memory/disk) and document tuning for commodity laptops.
+## Project Guidelines
+This template provides a foundation, but the direction of your analysis is up to you. Below are some areas to focus on as you build your pipeline:
+
+* **Data Processing**: You'll need a way to ingest and version match event data (e.g., StatsBomb). Note that **IDs are currently NOT normalized** across datasets (e.g., StatsBomb team IDs do not currently map to Polymarket market slugs). A critical early task is creating those mapping layers to join betting interest with match events.
+* **Feature Engineering**: Consider how to segment the game. breaking matches into **possessions or chains** is a common approach. Think about what derived features (carries, pressure, zones of control) might be predictive or descriptive.
+* **Identity Resolution**: Real-world data is messy. You may need to resolve player identities across different providers (e.g., mapping Transfermarkt IDs to match data) or handle player transfers and loans.
+* **Metrics & Analytics**: Explore computing standard advanced metrics like **xG, xThreat, or Field Tilt**. Storing these efficiently (e.g., in DuckDB or Postgres) will make analysis much faster.
+* **Evaluation**: How do you know your model is good? Consider comparing your meaningful metrics against published benchmarks or using them to identify outliers.
+* **Visualization**: Analytics needs to be communicated. A **static React + Leaflet** site is a great way to host interactive visualizations without heavy backend infrastructure.
+* **Performance**: Keep an eye on efficiency. Documenting the runtime and memory usage of your pipeline helps ensure it can run on standard hardware.
 
 ## Market Analysis Integration (Optional)
-Analyze market efficiency by correlating match events (xG, momentum) with historical odds and trade volume using **Polymarket** data.
+Analyze market efficiency by correlating match events (xG, momentum) with historical odds and trade volume using **Polymarket** data. 
+
+> [!TIP]
+> **Integration Task**: Since these datasets are from different providers, you'll need to manually resolve entities (e.g., mapping the StatsBomb team name `Arsenal FC` to the Polymarket slug `arsenal`).
 
 > [!NOTE]
 > **Note on Live Data**: We do not provide live price feeds. All Polymarket data is provided as historical Parquet exports for backtesting and analysis.
@@ -86,10 +91,10 @@ The following data is available in `data/Polymarket/` for analysis:
    - Interactive visualizations with searchable filters
    - See `template/dashboard_template.md` for detailed documentation
 
-## Ways of Working / Expectations
-* Remote practicum; comms via **Discord**; mentorship and tutorials provided; scope is modular and may evolve.
-* **Professionalism + initiative**, comfort with changing specs, **weekly visible progress** (commits), collaboration and respectful conduct.
-* **Code open-sourced under MIT** (contributors keep attribution); data licensing is governed by respective providers.
+## Recommended Workflow
+* **Communication**: We use **Discord** for day-to-day chat. Feel free to ask questions and share updates there.
+* **Progress**: Regular, visible progress (e.g., weekly commits) is the best way to get feedback. We value initiative and the ability to adapt as you learn more about the data.
+* **Open Source**: We encourage keeping your code open (MIT License), while respecting the specific licensing terms of the data providers.
 
 
 ## Data Access
