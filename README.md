@@ -37,6 +37,9 @@ The following data is available in `data/Polymarket/` for analysis:
 * `soccer_event_stats.parquet`: Aggregated volume and market count per event.
 * `soccer_summary.parquet`: High-level market summaries (trade counts, first/last trade).
 
+> [!NOTE]
+> **Polymarket timestamps**: `soccer_trades.parquet`, `soccer_odds_history.parquet`, and the `first_trade`/`last_trade` fields in `soccer_summary.parquet` are stored as epoch milliseconds in Parquet `TIMESTAMP` columns. Read them by casting via Int64 -> Datetime(ms) at runtime. The EDA template applies this correction automatically.
+
 ## Stretch Goals (Optional)
 * Nightly incremental updater
 * Transformer sequence classifier for press events
