@@ -93,7 +93,7 @@ The EDA template is optimized for machines with limited RAM (8GB+) using **Polar
 * **Lazy Evaluation**: Uses `scan_parquet` to build query plans executed only when collected
 * **Column Selection**: Only required columns are loaded
 * **Sequential Processing**: Memory released between analysis sections
-* **Timestamp Correction**: Handles millisecond/microsecond inconsistencies automatically
+* **Timestamp Correction**: Reinterprets Polymarket `timestamp`, `first_trade`, and `last_trade` fields as epoch milliseconds (cast Int64 -> Datetime(ms)) to fix ms-as-ns storage.
 
 ## How to Run
 
