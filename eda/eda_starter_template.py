@@ -224,7 +224,12 @@ def analyze_pm_events() -> dict[str, Any]:
 
 def analyze_pm_summary() -> dict[str, Any]:
     header("POLYMARKET: SUMMARY")
-    lf = pl.scan_parquet(POLYMARKET_DIR / "soccer_summary.parquet")
+    lf = pl.scan_parquet(POLYMARKET_DIR / "soccer_summary.parquet").with_columns(
+        [
+            pl.col("first_trade").cast(pl.Int64).cast(pl.Datetime("ms")),
+            pl.col("last_trade").cast(pl.Int64).cast(pl.Datetime("ms")),
+        ]
+    )
 
     stats = lf.select(
         [
